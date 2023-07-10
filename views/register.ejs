@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/login.css">
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/d13807cb98.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto&family=Staatliches&display=swap" rel="stylesheet">
+    <title>Dubai Shoes House</title>
+</head>
+
+<body>
+
+    <!-- Navbar -->
+    <header>
+        <div id="header">
+            <!-- <div id="menu-bar" class="fa fa-bars"></div> -->
+            <div class="container">
+                <nav>
+                    <h1 class="title"><a href="/"><img src="img/logo.png" alt=""></a></h1>
+                    <ul id="sidemenu">
+                        <li><a href="/">Contact</a></li>
+                        <li><a href="/cart">Cart</a></li>
+                        <li><a href="/login">Login</a></li>
+                        <i class="fa-solid fa-xmark" onclick="closemenu()"></i>
+                    </ul>
+                    <i class="fa-solid fa-bars" onclick="openmenu()"></i>
+                </nav>
+                <hr>
+            </div>
+        </div>
+    </header>
+    <!-- Login -->
+    <section id="login">
+        <div class="container">
+            <div class="login register">
+                <h1>REGISTER</h1>
+                <form action="/register" method="POST">
+                    <div class="content">
+                        <div class="input-field">
+                            <input type="text" placeholder="Full Name" name="fname">
+                        </div>
+                        <div class="input-field">
+                            <input type="email" placeholder="Email" name="email">
+                        </div>
+                        <div class="input-field">
+                            <input type="number" placeholder="Phone Number" name="phone">
+                        </div>
+                        <div class="input-field">
+                            <input id="password" type="password" placeholder="Password" name="password">
+                        </div>
+                        <div class="input-field">
+                            <input id="cpassword" type="password" placeholder="Confirm Password" name="cpassword">
+                        </div>
+                        <% if(messages.notMatched) { %>
+                            <div class="alert">
+                                <h5>
+                                    <%= messages.notMatched %>
+                                </h5>
+                            </div>
+                        <% } %>
+                        
+                        <button type="submit" class="registerbtn">Register</button>
+                    </div>
+                </form>
+                <a href="/login">Already have an account</a>
+            </div>
+        </div>
+    </section>
+    <!-- Javascript -->
+
+    <!-- code for responsive navbar -->
+    <script>
+        var sidemenu = document.getElementById("sidemenu");
+
+        function openmenu() {
+            sidemenu.style.right = "0";
+        }
+        function closemenu() {
+            sidemenu.style.right = "-100%";
+        }
+    </script>
+    <script src="js/script.js"></script>
+    <script>
+        window.history.forward();
+        function noBack() {
+            window.history.forward();
+        }
+    </script>
+</body>
+
+</html>

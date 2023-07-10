@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .form {
+            display: flex;
+            flex-direction: column;
+            width: 80vw;
+            height: 50vh;
+            /* background-color: red; */
+            margin: 10px auto 0;
+            align-items: center;
+            justify-content: center;
+        }
+        .in-fd{
+            margin-top: 10px;
+            margin-bottom: 10px;
+            font-size: large;
+            font-weight: bold;
+        }
+        .in-fd input{
+            padding: 5px 10px;
+        }
+    </style>
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/d13807cb98.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
+    <title>Dubai Shoes House</title>
+</head>
+
+<body>
+    <div class="products">
+        <h1>Add Products</h1>
+        <form class="form"  action="/addproducts" method="POST">
+            <div>
+                <div class="in-fd">
+                    <label for="img">Image Path:</label>
+                    <input type="text" name="img">
+                </div>
+                <div class="in-fd">
+                    <label for="pname">Product Name:</label>
+                    <input type="text" name="pname">
+                </div>
+                <div class="in-fd">
+                    <label for="pdetails">Products Details:</label>
+                    <input type="text" name="pdetails">
+                </div>
+                <div class="in-fd">
+                    <label for="price">Price:</label>
+                    <input type="number" name="price">
+                </div>
+                <div class="in-fd">
+                    <label for="size">Size:</label>
+                    <input type="number" name="size">
+                </div>
+                <div class="in-fd">
+                    <label for="quantity">Stock:</label>
+                    <input type="number" name="stock">
+                </div>
+                <button class="addpbtn">Add Product</button>
+            </div>
+        </form>
+    </div>
+    <script>
+        window.history.forward();
+        function noBack() {
+            window.history.forward();
+        }
+    </script>
+</body>

@@ -1,0 +1,395 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    <style>
+        .btable,
+        .btable th,
+        .btable td {
+            border: 1px solid black;
+            border-collapse: collapse;
+            padding: 15px 90px;
+            text-align: center;
+        }
+
+        .fa-solid {
+            font-size: 12px;
+        }
+
+        .bada {
+            font-size: 14px;
+        }
+
+        .qform {
+            display: flex;
+            align-self: center;
+            align-items: center;
+            justify-content: center;
+        }
+
+        input[type="number"] {
+            -webkit-appearance: textfield;
+            -moz-appearance: textfield;
+            appearance: textfield;
+        }
+
+        input[type=number]::-webkit-inner-spin-button,
+        input[type=number]::-webkit-outer-spin-button {
+            -webkit-appearance: none;
+        }
+
+        .number-input {
+            border: 2px solid #ddd;
+            display: inline-flex;
+            align-items: center;
+        }
+
+        .number-input,
+        .number-input * {
+            box-sizing: border-box;
+        }
+
+        .number-input button {
+            outline: none;
+            -webkit-appearance: none;
+            background-color: transparent;
+            border: none;
+            align-items: center;
+            justify-content: center;
+            width: 1.5rem;
+            height: 1.5rem;
+            cursor: pointer;
+            margin: 0;
+            position: relative;
+        }
+
+        .number-input button:before,
+        .number-input button:after {
+            display: inline-block;
+            position: absolute;
+            content: '';
+            width: 1rem;
+            height: 2px;
+            background-color: #212121;
+            transform: translate(-50%, -50%);
+        }
+
+        .number-input button.plus:after {
+            transform: translate(-50%, -50%) rotate(90deg);
+        }
+
+        .number-input input[type=number] {
+            font-family: sans-serif;
+            max-width: 3rem;
+            height: 1.5rem;
+            padding: .5rem;
+            border: solid #ddd;
+            border-width: 0 2px;
+            text-align: center;
+        }
+
+        .ptbbtn {
+            margin: 40px auto
+        }
+
+        .bcontainer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .delbtn {
+            margin-top: 20px;
+        }
+
+        .in-fd {
+            margin-top: 10px;
+            margin-bottom: 10px;
+            font-size: large;
+            font-weight: bold;
+        }
+
+        .in-fd input {
+            padding: 5px 10px;
+            width: 30vw;
+        }
+
+        .billcontainer {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            /* background-color: red; */
+            width: 80vw;
+            margin: auto;
+        }
+        .billcontainer table, .billcontainer td {
+            /* border: 1px solid black; */
+            border-collapse: collapse;
+            padding: 10px;
+        }
+        .billform{
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+        }
+        .billcontainer h1{
+            margin: 50px auto 10px;
+        }
+    </style>
+
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/d13807cb98.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
+    <title>Dubai Shoes House</title>
+</head>
+
+
+<body>
+    <!-- Navbar -->
+    <header>
+        <div id="header">
+            <!-- <div id="menu-bar" class="fa fa-bars"></div> -->
+            <div class="container">
+                <nav>
+                    <h1 class="title"><a href="/"><img src="img/logo.png" alt=""></a></h1>
+                    <ul id="sidemenu">
+                        <li>
+                            <%=user.fname%>
+                        </li>
+                        <li><a href="/">Contact</a></li>
+                        <li><a href="/cart">Cart ( <%= data.length %> )</a></li>
+                        <li>
+                            <form action="/logout?_method=DELETE" method="POST"><button class="logout-btn"
+                                    type="submit">Logout</button></form>
+                        </li>
+                        <i class="fa-solid fa-xmark" onclick="closemenu()"></i>
+                    </ul>
+                    <i class="fa-solid fa-bars" onclick="openmenu()"></i>
+                </nav>
+                <hr>
+            </div>
+        </div>
+    </header>
+    <!--Products-->
+
+    <div class="products" id="Products">
+        <h1>CART</h1>
+        <div class="box">
+            <% if(data.length){ for(var i=0; i< data.length; i++) {%>
+                <div class="card" id="item<%= (i+1) %>">
+
+                    <div class="small_card">
+                        <i class="fa-solid fa-heart"></i>
+                        <i class="fa-solid fa-share"></i>
+                    </div>
+
+                    <div class="image">
+                        <img src=" <%= data[i].img%> ">
+                    </div>
+
+                    <div class="products_text">
+                        <h2>
+                            <%= data[i].pname%>
+                        </h2>
+                        <p>
+                            <%= data[i].pdetails%>
+                        </p>
+                        <h3 id="price<%= data[i]._id%>">
+                            <i class="bada fa-sharp fa-solid fa-indian-rupee-sign"></i>
+                            <%= data[i].price%>
+                        </h3>
+                        <div class="size">
+                            <label for="size">Size:</label>
+                            <%= data[i].size%>
+                        </div>
+                        <div class="size">
+                            <form class="qform" action="/quantity/<%= data[i]._id%>" method="POST">
+                                <label for="quantity">Quantity:</label>
+                                <div class="number-input">
+                                    <button
+                                        onclick="this.parentNode.querySelector('input[type=number]').stepDown()"></button>
+                                    <input class="quantity" min="0" placeholder="0" name="quantity"
+                                        value="<%= data[i].quantity%>" type="number">
+                                    <button onclick="this.parentNode.querySelector('input[type=number]').stepUp()"
+                                        class="plus"></button>
+                                </div>
+                                <button type="submit" for="quantity"></button>
+
+                            </form>
+                        </div>
+
+
+                        <a href="/remove/<%= data[i]._id%>" class="delbtn">Delete</a>
+                    </div>
+
+                </div>
+
+                <% } }else{ %>
+                    <tr>
+                        <td colspan="3">No products added at a time</td>
+                    </tr>
+                    <% } %>
+
+        </div>
+    </div>
+    <div class="products">
+        <h1>BILLING</h1>
+    </div>
+    <div class="bcontainer">
+
+        <table class="btable">
+            <thead>
+                <tr>
+                    <th>Item</th>
+                    <th>Size</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>final</th>
+                </tr>
+            </thead>
+            <tbody>
+                <% if(data.length){ for(var i=0; i< data.length; i++) {%>
+                    <tr>
+                        <td>
+                            <%= data[i].pname%>
+                        </td>
+                        <td>
+                            <%= data[i].size%>
+                        </td>
+                        <td>
+                            <i class="fa-sharp fa-solid fa-indian-rupee-sign"></i>
+                            <%= data[i].price%>
+                        </td>
+                        <td>
+                            <%= data[i].quantity%>
+                        </td>
+                        <td id="fp<%= (i+1) %>"">
+                            <i class=" fa-sharp fa-solid fa-indian-rupee-sign"></i>
+                            <%= data[i].price * data[i].quantity %>
+                        </td>
+                    </tr>
+                    <% } }else{ %>
+                        <tr>
+                            <td colspan=" 3">No products added at a time</td>
+                        </tr>
+                        <% } %>
+                            <tr>
+                                <td></td>
+                                <td></td>
+                                <td></td>
+                                <th>Total</th>
+                                <th>
+                                    <i class="fa-sharp fa-solid fa-indian-rupee-sign"></i>
+                                    <%=total%>
+                                </th>
+                            </tr>
+            </tbody>
+        </table>
+
+    </div>
+    
+    <div class="billcontainer">
+        <h1>Billing Details:</h1>
+        <form action="/checkout" method="POST">
+            <div class="billform">
+                <table>
+                    <tr>
+                        <td>
+                            <div class="in-fd">
+                                <label for="address">Address:</label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="in-fd">
+                                <input type="text" name="address">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="in-fd">
+                                <label for="city">City:</label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="in-fd">
+                                <input type="text" name="city">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="in-fd">
+                                <label for="state">State:</label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="in-fd">
+                                <input type="text" name="state">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="in-fd">
+                                <label for="pincode">Pincode:</label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="in-fd">
+                                <input type="number" name="pincode">
+                            </div>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            <div class="in-fd">
+                                <label for="phone">Phone:</label>
+                            </div>
+                        </td>
+                        <td>
+                            <div class="in-fd">
+                                <input type="number" name="phone">
+                            </div>
+                        </td>
+                    </tr>
+                </table>
+
+                <button class="delbtn ptbbtn">Proceed to Buy</button>
+            </div>
+        </form>
+    </div>
+
+
+    <!-- Javascript -->
+
+    <!-- code for responsive navbar -->
+    <script>
+        var sidemenu = document.getElementById("sidemenu");
+
+        function openmenu() {
+            sidemenu.style.right = "0";
+        }
+        function closemenu() {
+            sidemenu.style.right = "-100%";
+        }
+    </script>
+    <script src="js/script.js"></script>
+    <script>
+        window.history.forward();
+        function noBack() {
+            window.history.forward();
+        }
+    </script>
+</body>
+
+</html>

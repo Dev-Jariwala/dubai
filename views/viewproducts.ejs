@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/style.css">
+    
+    <!-- Font Awesome -->
+    <script src="https://kit.fontawesome.com/d13807cb98.js" crossorigin="anonymous"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Staatliches&display=swap" rel="stylesheet">
+    <title>Dubai Shoes House</title>
+</head>
+
+
+<body>
+    <!--Products-->
+
+    <div class="products" id="Products">
+        <h1>Products</h1>
+        <a href="/addproducts"><button class="addpbtn" id="addProduct">Add product</button></a>
+        
+        <div class="box">
+            <% if(data.length){
+     
+                for(var i = 0; i< data.length; i++) {%>
+                <div class="card" id="item<%= (i+1) %>">
+
+                    <div class="small_card">
+                        <i class="fa-solid fa-heart"></i>
+                        <i class="fa-solid fa-share"></i>
+                    </div>
+    
+                    <div class="image">
+                        <img src=" <%= data[i].img%> ">
+                    </div>
+    
+                    <div class="products_text">
+                        <h2><%= data[i].pname%></h2>
+                        <p>
+                            <%= data[i].pdetails%>
+                        </p>
+                        <h3><%= data[i].price%> Rs</h3>
+                        <div class="size">
+                            <label for="size">Size:</label>
+                            <%= data[i].size%>
+                        </div>
+                        <div class="size">
+                            <label for="stock">Stock:</label>
+                            <%= data[i].stock%>
+                        </div>
+                        
+                        <a href="/delete/<%= data[i]._id%>" class="delbtn">Delete</a>
+                    </div>
+                    
+                </div>
+                <% }
+                         
+                 }else{ %>
+                     <tr>
+                        <td colspan="3">No products added at a time</td>
+                     </tr>
+                  <% } %> 
+
+        </div>
+    </div>
+
+    <!-- Javascript -->
+
+    <!-- code for responsive navbar -->
+    <script>
+        var sidemenu = document.getElementById("sidemenu");
+
+        function openmenu() {
+            sidemenu.style.right = "0";
+        }
+        function closemenu() {
+            sidemenu.style.right = "-100%";
+        }
+    </script>
+    <script src="js/script.js"></script>
+    <script>
+        window.history.forward();
+        function noBack() {
+            window.history.forward();
+        }
+    </script>
+</body>
+
+</html>

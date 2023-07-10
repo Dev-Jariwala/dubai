@@ -1,0 +1,33 @@
+<table class="table" cellspacing="30">
+    <thead>
+      <tr>
+        <th scope="col">#</th>
+        <th scope="col">img</th>
+        <th scope="col">pname</th>
+        <th scope="col">pdetails</th>
+        <th scope="col">price</th>
+        <th scope="col">size</th>
+      </tr>
+    </thead>
+    <tbody>
+      <% if(data.length){
+     
+      for(var i = 0; i< data.length; i++) {%>  
+      <tr>
+        <th scope="row"><%= (i+1) %></th>
+        <td><%= data[i].img%></td>
+        <td><%= data[i].pname%></td>
+        <td><%= data[i].pdetails%></td>
+        <td><%= data[i].price%></td>
+        <td><%= data[i].size%></td>
+      </tr>
+      <% }
+               
+       }else{ %>
+           <tr>
+              <td colspan="3">No user</td>
+           </tr>
+        <% } %>    
+      
+    </tbody>
+    </table>
